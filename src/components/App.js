@@ -28,13 +28,13 @@ function App() {
     setFoods(today);
   };
 
-  const nextDay = () => {
-    if (day < foods.data_points.length) {
+  const prevDay = () => {
+    if (day < foods.data_points.length - 1) {
       setDay(day => day + 1);
     }
   };
 
-  const prevDay = () => {
+  const nextDay = () => {
     if (day > 0) {
       setDay(day => day - 1);
     }
@@ -50,9 +50,9 @@ function App() {
       <header className="App-header">
         <Search addFood={addFood} />
         <div className="App-control">
-          <i onClick={nextDay} className="fas fa-chevron-left"></i>
+          <i onClick={prevDay} className="fas fa-chevron-left"></i>
           <p className="normal-text">{date}</p>
-          <i onClick={prevDay} className="fas fa-chevron-right"></i>
+          <i onClick={nextDay} className="fas fa-chevron-right"></i>
         </div>
       </header>
       <div className="App-content">
