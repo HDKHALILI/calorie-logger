@@ -1,3 +1,4 @@
+### Checkout Live [Demo](https://blissful-snyder-c7e516.netlify.com)
 # This is a calorie logger app
 The app uses nutritionix api to get data
 
