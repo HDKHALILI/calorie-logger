@@ -1,0 +1,18 @@
+.FoodItem {
+  display: flex;
+  align-items: center;
+}
+
+.FoodItem img {
+  width: 50px;
+  height: 50px;
+  margin: 0 0.5rem;
+}
+
+.FoodItem-texts {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 0.8rem 0;
+  border-bottom: 1px solid #cccccc;
+}

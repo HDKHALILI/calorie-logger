@@ -1,0 +1,31 @@
+.Summary {
+  display: flex;
+  flex-direction: column;
+  padding: 0 0.4rem;
+  overflow: hidden;
+}
+
+.Summary-details {
+  display: flex;
+  justify-content: space-between;
+  padding: 1.2rem 0.5rem;
+}
+
+.meal-calories {
+  display: flex;
+  justify-content: space-between;
+  margin: 1rem 0;
+  text-align: center;
+}
+
+.meal-calories div {
+  display: flex;
+  flex-direction: column;
+  padding: 0.5rem 0.5rem;
+}
+
+@media (max-width: 620px) {
+  .Summary-details {
+    padding: 6rem 0 0;
+  }
+}

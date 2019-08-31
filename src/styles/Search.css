@@ -1,0 +1,31 @@
+.Search {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.Search-input {
+  width: 25rem;
+  display: flex;
+  align-items: center;
+}
+.Search-input i {
+  position: absolute;
+  color: #999999;
+  margin: 0 10px;
+  font-size: 16px;
+  z-index: 10;
+}
+
+.Search-input input {
+  font-size: 16px;
+  width: 100%;
+  padding: 10px 40px;
+  border-radius: 5px;
+  border: 1px solid var(--white);
+  outline: none;
+  z-index: 5;
+}
+
+.Search-input input:focus {
+  border: 1px solid var(--cloudy);
+}
