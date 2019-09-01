@@ -4,8 +4,8 @@ import "../styles/FoodList.css";
 function FoodList(props) {
   return (
     <div>
-      {props.foods.intake_list.map(food => (
-        <FoodItem key={food.food_name} food={food} date={props.foods.date} />
+      {props.foods.map(food => (
+        <FoodItem key={food.id} food={food} />
       ))}
     </div>
   );
