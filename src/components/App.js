@@ -8,72 +8,67 @@ import Search from "./Search";
 import "../styles/App.css";
 import dietData from "../data/data";
 
-function App() {
-  const [foods, setFoods] = React.useState(() => {
-    // return dietData;
-    return JSON.parse(window.localStorage.getItem("foods") || "[]");
-  });
-  const [day, setDay] = React.useState(0);
-
-  React.useEffect(() => {
-    window.localStorage.setItem("foods", JSON.stringify(foods));
-  }, [foods]);
-
-  const addFood = food => {
-    setFoods(foods => [...foods, food]);
+class App extends React.Component {
+  state = {
+    foods: dietData,
+    day: 0
   };
-  // const addFood = food => {
-  //   const today = foods;
-  //   foods.data_points[0].intake_list = [
-  //     ...foods.data_points[0].intake_list,
-  //     food
-  //   ];
-  //   setFoods(today);
-  //   console.log(today);
-  // };
 
-  // const prevDay = () => {
-  //   if (day < foods.data_points.length - 1) {
-  //     setDay(day => day + 1);
-  //   }
-  // };
+  addFood = newFood => {
+    const updatedFood = (this.state.foods.data_points[0].intake_list = [
+      ...this.state.foods.data_points[0].intake_list,
+      newFood
+    ]);
+    this.setState(updatedFood);
+  };
 
-  // const nextDay = () => {
-  //   if (day > 0) {
-  //     setDay(day => day - 1);
-  //   }
-  // };
-  // const date =
-  //   foods.data_points[day].date.toLocaleDateString() ===
-  //   new Date().toLocaleDateString()
-  //     ? "Today"
-  //     : foods.data_points[day].date.toLocaleDateString();
+  prevDay = () => {
+    const { foods, day } = this.state;
+    if (day < foods.data_points.length - 1) {
+      this.setState(({ day }) => ({ day: day + 1 }));
+    }
+  };
 
-  return (
-    <div className="App">
-      <header className="App-header">
-        <Search addFood={addFood} />
-        <div className="App-control">
-          <i className="fas fa-chevron-left"></i>
-          <p className="normal-text">Today</p>
-          <i className="fas fa-chevron-right"></i>
-        </div>
-      </header>
-      <div className="App-content">
-        <div className="App-summary">
-          <Profile />
-          <Summary foods={foods} />
-        </div>
-        <div className="App-foods">
-          {foods.length > 0 ? (
-            <FoodList foods={foods} />
-          ) : (
-            <p className="center-text">No food is added for today</p>
-          )}
+  nextDay = () => {
+    if (this.state.day > 0) {
+      this.setState(({ day }) => ({ day: day - 1 }));
+    }
+  };
+
+  render() {
+    const { foods, day } = this.state;
+    const date =
+      foods.data_points[day].date.toLocaleDateString() ===
+      new Date().toLocaleDateString()
+        ? "Today"
+        : foods.data_points[day].date.toLocaleDateString();
+
+    return (
+      <div className="App">
+        <header className="App-header">
+          <Search addFood={this.addFood} />
+          <div className="App-control">
+            <i onClick={this.prevDay} className="fas fa-chevron-left"></i>
+            <p className="normal-text">{date}</p>
+            <i onClick={this.nextDay} className="fas fa-chevron-right"></i>
+          </div>
+        </header>
+        <div className="App-content">
+          <div className="App-summary">
+            <Profile />
+            <Summary foods={foods.data_points[day].intake_list} />
+          </div>
+          <div className="App-foods">
+            {foods.data_points[day].intake_list.length > 0 ? (
+              <FoodList foods={foods.data_points[day]} />
+            ) : (
+              <p className="center-text">No food is added for today</p>
+            )}
+          </div>
         </div>
       </div>
-    </div>
-  );
+    );
+  }
 }
 
 export default App;

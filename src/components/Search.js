@@ -7,6 +7,7 @@ import "../styles/Search.css";
 
 const APP_ID = process.env.REACT_APP_ID;
 const APP_KEY = process.env.REACT_APP_KEY;
+
 const foodUrl = "https://trackapi.nutritionix.com/v2/search/instant?query=";
 const nutrientUrl = "https://trackapi.nutritionix.com/v2/natural/nutrients";
 const itemSearchUrl = "https://trackapi.nutritionix.com/v2/search/item";
@@ -43,51 +44,57 @@ function Search(props) {
   };
 
   React.useEffect(() => {
-    axios
-      .get(`${itemSearchUrl}?nix_item_id=${brandedFood}`, {
-        headers: {
-          "x-app-id": APP_ID,
-          "x-app-key": APP_KEY
-        }
-      })
-      .then(({ data }) => {
-        setFood(data.foods);
-        setShowDetail(true);
-      });
+    if (brandedFood) {
+      axios
+        .get(`${itemSearchUrl}?nix_item_id=${brandedFood}`, {
+          headers: {
+            "x-app-id": APP_ID,
+            "x-app-key": APP_KEY
+          }
+        })
+        .then(({ data }) => {
+          setFood(data.foods);
+          setShowDetail(true);
+        });
+    }
   }, [brandedFood]);
 
   React.useEffect(() => {
-    axios
-      .get(`${foodUrl}${input}`, {
-        headers: {
-          "x-app-id": APP_ID,
-          "x-app-key": APP_KEY
-        }
-      })
-      .then(({ data }) => {
-        setData(data);
-      })
-      .catch(error => console.log(error.message));
+    if (input) {
+      axios
+        .get(`${foodUrl}${input}`, {
+          headers: {
+            "x-app-id": APP_ID,
+            "x-app-key": APP_KEY
+          }
+        })
+        .then(({ data }) => {
+          setData(data);
+        })
+        .catch(error => console.log(error.message));
+    }
   }, [input]);
 
   React.useEffect(() => {
-    axios({
-      method: "post",
-      url: nutrientUrl,
-      headers: {
-        "Content-Type": "application/json",
-        "x-app-id": APP_ID,
-        "x-app-key": APP_KEY
-      },
-      data: {
-        query: commonFood
-      }
-    })
-      .then(({ data }) => {
-        setFood(data.foods);
-        setShowDetail(true);
+    if (commonFood) {
+      axios({
+        method: "post",
+        url: nutrientUrl,
+        headers: {
+          "Content-Type": "application/json",
+          "x-app-id": APP_ID,
+          "x-app-key": APP_KEY
+        },
+        data: {
+          query: commonFood
+        }
       })
-      .catch(error => console.log(error.message));
+        .then(({ data }) => {
+          setFood(data.foods);
+          setShowDetail(true);
+        })
+        .catch(error => console.log(error.message));
+    }
   }, [commonFood]);
   return (
     <div className="Search">

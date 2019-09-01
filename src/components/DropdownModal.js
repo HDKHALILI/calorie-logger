@@ -6,8 +6,6 @@ function DropdownModal(props) {
   const { common, branded } = props;
   const ref = React.useRef();
   useOnClickOutside(ref, event => {
-    console.log("event target", event.target);
-    console.log("ref target", ref.current);
     if (event.target === ref.current) {
     }
     setShow(false);
@@ -20,27 +18,31 @@ function DropdownModal(props) {
     <div className="DropdownModal" ref={ref}>
       <div className="dropdown-list">
         <p className="category-title">COMMON</p>
-        {common.map(food => (
-          <div
-            key={food.food_name}
-            onClick={() => props.selectFood("common", food.food_name)}
-            className="food-item"
-          >
-            <img src={food.photo.thumb} alt={food.food_name} />
-            <p className="food-name">{food.food_name}</p>
-          </div>
-        ))}
+        <div className="common">
+          {common.map(food => (
+            <div
+              key={food.food_name}
+              onClick={() => props.selectFood("common", food.food_name)}
+              className="food-item"
+            >
+              <img src={food.photo.thumb} alt={food.food_name} />
+              <p className="food-name">{food.food_name}</p>
+            </div>
+          ))}
+        </div>
         <p className="category-title">Branded</p>
-        {branded.map(food => (
-          <div
-            key={food.food_name}
-            onClick={() => props.selectFood("branded", food.nix_item_id)}
-            className="food-item"
-          >
-            <img src={food.photo.thumb} alt={food.food_name} />
-            <p className="food-name">{food.food_name}</p>
-          </div>
-        ))}
+        <div className="branded">
+          {branded.map(food => (
+            <div
+              key={food.food_name}
+              onClick={() => props.selectFood("branded", food.nix_item_id)}
+              className="food-item"
+            >
+              <img src={food.photo.thumb} alt={food.food_name} />
+              <p className="food-name">{food.food_name}</p>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );

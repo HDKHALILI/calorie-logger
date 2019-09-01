@@ -33,7 +33,6 @@ function Detail(props) {
   };
 
   const handleMealType = event => {
-    console.log(event.target.value);
     setMealType(event.target.value);
   };
 
