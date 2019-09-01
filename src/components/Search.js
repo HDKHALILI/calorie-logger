@@ -5,10 +5,8 @@ import DropdownModal from "./DropdownModal";
 import Details from "./Details";
 import "../styles/Search.css";
 
-// const APP_ID = process.env.REACT_APP_ID;
-// const APP_KEY = process.env.REACT_APP_KEY;
-const APP_ID = "f035d378";
-const APP_KEY = "f55e2f292161d46d84471ed3f1dc92bb";
+const APP_ID = process.env.REACT_APP_ID;
+const APP_KEY = process.env.REACT_APP_KEY;
 const foodUrl = "https://trackapi.nutritionix.com/v2/search/instant?query=";
 const nutrientUrl = "https://trackapi.nutritionix.com/v2/natural/nutrients";
 const itemSearchUrl = "https://trackapi.nutritionix.com/v2/search/item";
